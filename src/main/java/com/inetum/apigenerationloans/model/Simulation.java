@@ -1,14 +1,14 @@
-package com.inetum.apisimulationloans.model;
+package com.inetum.apigenerationloans.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "simulations")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Simulation {
@@ -20,9 +20,11 @@ public class Simulation {
     private String currency;
     private Double interestRate;
     private Integer term; // months
-    private Double installment;
-    private Boolean acceptance;
-    private LocalDateTime simulationDate;
+
+    private Double installment;//se calcula segun loanAmaunt, currency, interesRate y term
+    private Double totalPayment;
+    private Boolean acceptance;// true si el installment menor que el 50% del ingreso mensual del cliente
+    private LocalDateTime simulationDate;//fecha y hora de la simulacion
 
     @ManyToOne
     @JoinColumn(name = "client_id")

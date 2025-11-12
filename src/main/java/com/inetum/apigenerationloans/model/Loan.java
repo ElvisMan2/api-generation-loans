@@ -1,16 +1,16 @@
-package com.inetum.apisimulationloans.model;
+package com.inetum.apigenerationloans.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "loans")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Loan {
@@ -23,6 +23,7 @@ public class Loan {
     private Integer term; // months
     private Double installment;
     private Integer status; // 1: active, 0: inactive
+    private LocalDateTime creationDate;
 
     @ManyToOne
     @JoinColumn(name = "client_id")
