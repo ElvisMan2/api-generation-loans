@@ -65,4 +65,37 @@ public class LoanService {
 
         return loanMapper.toDTO(loan);
     }
+
+    public LoanDTO generateLoanBySimulationId(Long simulationId) {
+
+        //la simulacion se deberia obtener de una api externa
+        Simulation simulation = loanSimulationRepository.findById(simulationId)
+                .orElseThrow(() -> new NoSuchElementException("Simulation not found with ID: " + simulationId));
+
+        //obteniendo el id del cliente desde la simulacion
+        Long clientId = simulation.getClient().getClientId();
+
+        // el CLientId se deberia obtener de la simulacion
+        Client client = clientRepository.findById(clientId)
+                .orElseThrow(() -> new ClientNotFoundException(clientId));
+
+        //crear el prestamo
+        Loan loan = new Loan();
+        loan.setLoanAmount(simulation.getLoanAmount());
+        loan.setInterestRate(simulation.getInterestRate());
+        loan.setTerm(simulation.getTerm());
+        loan.setInstallment(simulation.getInstallment());
+        loan.setStatus(1); // activo
+        loan.setCreationDate(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
+        loan.setClient(client);
+        loan.setSimulation(simulation);
+        loan.setPaymentSchedule(null);//*se debe generar el cronograma de pagos
+
+
+        //guardar el prestamo
+        loanRepository.save(loan);
+
+        return loanMapper.toDTO(loan);
+    }
+
 }
