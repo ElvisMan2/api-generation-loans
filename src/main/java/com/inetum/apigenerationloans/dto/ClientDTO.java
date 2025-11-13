@@ -12,6 +12,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ClientDTO {
     @NotBlank
+    private Long clientId;
+
+    @NotBlank
     private String firstName;
 
     @NotBlank

@@ -1,11 +1,13 @@
 package com.inetum.apigenerationloans.dto;
 
+import com.inetum.apigenerationloans.model.Payment;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Builder
@@ -21,4 +23,5 @@ public class LoanDTO {
     private Integer status;//si esta terminada de pagar o no
     private LocalDateTime creationDate;
     private Long clientId;//id del cliente al que pertenece el prestamo
+    private List<Payment> payment;//lista de pagos a realizar
 }

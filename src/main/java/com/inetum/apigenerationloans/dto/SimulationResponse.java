@@ -11,8 +11,8 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SimulationDTO {
-    private Long id;
+public class SimulationResponse {
+    private Long simulationId;
     private Double loanAmount;
     private String currency;
     private Double interestRate;

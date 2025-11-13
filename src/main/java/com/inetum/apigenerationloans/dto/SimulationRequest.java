@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class LoanSimulationRequest {
+public class SimulationRequest {
     @NotNull
     @Positive
     private Double loanAmount;

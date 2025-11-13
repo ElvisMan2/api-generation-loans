@@ -1,5 +1,6 @@
 package com.inetum.apigenerationloans.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,19 +16,22 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PaymentSchedule {
+public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long installmentId;
 
-    private String currency; // "peruvian soles"
+    private Integer paymentNumber;
+    private String currency; // "soles"
     private Double installment;
     private Double amortization;
     private Double interest;
     private LocalDate dueDate;
     private Double capitalBalance;
 
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="loan_id")
+    @JsonIgnore
     private Loan loan;
 }

@@ -22,13 +22,7 @@ public class LoanController {
     }
 
 
-    @PostMapping("/generate/client/{clientId}/simulation/{simulationId}")
-    public ResponseEntity<LoanDTO> generateLoanByClientIdAndSimulationId(
-            @PathVariable Long clientId,
-            @PathVariable Long simulationId) {
-        LoanDTO loanDTO = loanService.createLoanByClientIdAndSimulationId(clientId, simulationId);
-        return ResponseEntity.ok(loanDTO);
-    }
+    //generacion de prestamos a partir de una simulacion existente
 
     @PostMapping("/generate/simulation/{simulationId}")
     public ResponseEntity<LoanDTO> generateLoanBySimulationId(

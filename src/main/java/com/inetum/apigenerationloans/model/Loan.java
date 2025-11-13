@@ -24,6 +24,7 @@ public class Loan {
     private Double installment;
     private Integer status; // 1: active, 0: inactive
     private LocalDateTime creationDate;
+    private String Currency; // "soles"
 
     @ManyToOne
     @JoinColumn(name = "client_id")
@@ -33,5 +34,5 @@ public class Loan {
     private Simulation simulation;
 
     @OneToMany(mappedBy ="loan", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<PaymentSchedule> paymentSchedule = new ArrayList<>();
+    private List<Payment> payment = new ArrayList<>();
 }
