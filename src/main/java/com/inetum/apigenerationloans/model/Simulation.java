@@ -1,8 +1,10 @@
 package com.inetum.apigenerationloans.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -25,6 +27,9 @@ public class Simulation {
     private Double totalPayment;
     private Boolean acceptance;// true si el installment menor que el 50% del ingreso mensual del cliente
     private LocalDateTime simulationDate;//fecha y hora de la simulacion
+
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private LocalDate disbursementDate;
 
     @ManyToOne
     @JoinColumn(name = "client_id")

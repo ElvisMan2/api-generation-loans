@@ -50,7 +50,7 @@ public class LoanService {
         //trae la simulacion de la base de datos
         Simulation simulation = loanSimulationRepository.findById(simulationId)
                 .orElseThrow(() -> new NoSuchElementException("Simulation not found with ID: " + simulationId));
-
+        System.out.println(simulation.getDisbursementDate());
         //obteniendo el id del cliente desde la simulacion
         Long clientId = simulation.getClient().getClientId();
 
@@ -68,6 +68,7 @@ public class LoanService {
         loan.setCreationDate(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
         loan.setCurrency(simulation.getCurrency());
         loan.setClient(client);
+        loan.setDisbursementDate(simulation.getDisbursementDate());
         loan.setSimulation(simulation);
 
         // Calcular cuotas del cronograma
@@ -90,13 +91,13 @@ public class LoanService {
 
         String currency = loan.getCurrency();
 
-        // 🧠 Calcular cuota mensual (installment) con fórmula francesa
+        // Calcular cuota mensual (installment) con fórmula francesa
         double factor = Math.pow(1 + monthlyRate, term);
         double installment = principal * (monthlyRate * factor) / (factor - 1);
         installment = roundToTwoDecimals(installment); // cuota redondeada
 
         double balance = principal;
-        LocalDate dueDate = LocalDate.now().plusMonths(1);
+        LocalDate dueDate = loan.getDisbursementDate().plusMonths(1);
 
         LocalDate dueDateAux=null;//variable auxiliar para ajustar fechas
 
