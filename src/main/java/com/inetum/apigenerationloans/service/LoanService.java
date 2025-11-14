@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -68,7 +69,6 @@ public class LoanService {
         loan.setCurrency(simulation.getCurrency());
         loan.setClient(client);
         loan.setSimulation(simulation);
-        //loan.setPayment(null);//*se debe generar el cronograma de pagos
 
         // Calcular cuotas del cronograma
         List<Payment> payments = generatePaymentSchedule(loan);
@@ -98,9 +98,14 @@ public class LoanService {
         double balance = principal;
         LocalDate dueDate = LocalDate.now().plusMonths(1);
 
+        LocalDate dueDateAux=null;//variable auxiliar para ajustar fechas
+
+        double interest =0.0;
+        double amortization=0.0;
+
         for (int i = 0; i < term; i++) {
-            double interest = roundToTwoDecimals(balance * monthlyRate);
-            double amortization = roundToTwoDecimals(installment - interest);
+            interest = roundToTwoDecimals(balance * monthlyRate);
+            amortization = roundToTwoDecimals(installment - interest);
             balance = roundToTwoDecimals(balance - amortization);
 
             // Ajuste para que el último saldo quede exacto en cero si hay decimales flotantes
@@ -118,7 +123,17 @@ public class LoanService {
             payment.setAmortization(amortization);
             payment.setInterest(interest);
             payment.setCapitalBalance(balance);
-            payment.setDueDate(dueDate.plusMonths(i));
+
+            dueDateAux=dueDate.plusMonths(i);
+
+            // Ajustar fecha si cae en fin de semana
+            while (dueDateAux.getDayOfWeek() == DayOfWeek.SATURDAY ||
+                    dueDateAux.getDayOfWeek() == DayOfWeek.SUNDAY) {
+                dueDateAux = dueDateAux.minusDays(1);
+            }
+            // Establecer la fecha de vencimiento ajustada
+            payment.setDueDate(dueDateAux);
+
             payment.setLoan(loan);
 
             payments.add(payment);
