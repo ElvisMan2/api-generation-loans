@@ -1,0 +1,1 @@
+mvn clean verify sonar:sonar -Dsonar.projectKey=api-generation-loan -Dsonar.host.url=http://localhost:9000 -Dsonar.login=sqp_4362696bc42fc4759a966e3bf0eb4803271a10a3
