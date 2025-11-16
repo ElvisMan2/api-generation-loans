@@ -143,13 +143,13 @@
                 <configuration>
                     <excludes>
                         <!-- DTOs -->
-                        <exclude>com/inetum/apisimulationloans/dto/**</exclude>
+                        <exclude>com/inetum/apigenerationloans/dto/**</exclude>
 
                         <!-- Entities / Models JPA -->
-                        <exclude>com/inetum/apisimulationloans/model/**</exclude>
+                        <exclude>com/inetum/apigenerationloans/model/**</exclude>
 
                         <!-- MapStruct (interfaces & generated implementations) -->
-                        <exclude>com/inetum/apisimulationloans/mapper/**</exclude>
+                        <exclude>com/inetum/apigenerationloans/mapper/**</exclude>
                         <exclude>**/*Mapper.class</exclude>
                         <exclude>**/*MapperImpl.class</exclude>
 
