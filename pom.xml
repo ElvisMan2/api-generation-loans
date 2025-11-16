@@ -138,18 +138,43 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.11</version> <!-- Usa una versión reciente -->
+                <version>0.8.11</version>
+
+                <configuration>
+                    <excludes>
+                        <!-- DTOs -->
+                        <exclude>com/inetum/apisimulationloans/dto/**</exclude>
+
+                        <!-- Entities / Models JPA -->
+                        <exclude>com/inetum/apisimulationloans/model/**</exclude>
+
+                        <!-- MapStruct (interfaces & generated implementations) -->
+                        <exclude>com/inetum/apisimulationloans/mapper/**</exclude>
+                        <exclude>**/*Mapper.class</exclude>
+                        <exclude>**/*MapperImpl.class</exclude>
+
+                        <!-- Opcional: Clase principal -->
+                        <exclude>**/*Application.class</exclude>
+
+                        <!-- Opcional: Configurations -->
+                        <exclude>**/*Config.class</exclude>
+                    </excludes>
+                </configuration>
+
                 <executions>
+                    <!-- INSTRUMENTA EL CÓDIGO ANTES DE CORRER LOS TESTS -->
                     <execution>
                         <goals>
-                            <goal>prepare-agent</goal> <!-- Instrumenta el código -->
+                            <goal>prepare-agent</goal>
                         </goals>
                     </execution>
+
+                    <!-- GENERA EL REPORTE DESPUÉS DE LOS TESTS -->
                     <execution>
                         <id>report</id>
                         <phase>test</phase>
                         <goals>
-                            <goal>report</goal> <!-- Genera el reporte después de test -->
+                            <goal>report</goal>
                         </goals>
                     </execution>
                 </executions>
