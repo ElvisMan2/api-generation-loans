@@ -50,7 +50,7 @@ public class LoanService {
         //trae la simulacion de la base de datos
         Simulation simulation = loanSimulationRepository.findById(simulationId)
                 .orElseThrow(() -> new NoSuchElementException("Simulation not found with ID: " + simulationId));
-        System.out.println(simulation.getDisbursementDate());
+
         //obteniendo el id del cliente desde la simulacion
         Long clientId = simulation.getClient().getClientId();
 
@@ -101,8 +101,8 @@ public class LoanService {
 
         LocalDate dueDateAux=null;//variable auxiliar para ajustar fechas
 
-        double interest =0.0;
-        double amortization=0.0;
+        double interest;
+        double amortization;
 
         for (int i = 0; i < term; i++) {
             interest = roundToTwoDecimals(balance * monthlyRate);
