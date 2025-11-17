@@ -3,6 +3,7 @@ package com.inetum.apigenerationloans.controller;
 import com.inetum.apigenerationloans.dto.LoanDTO;
 import com.inetum.apigenerationloans.service.LoanService;
 
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,4 +29,5 @@ public class LoanController {
         LoanDTO loanDTO = loanService.generateLoanBySimulationId( simulationId);
         return ResponseEntity.ok(loanDTO);
     }
+
 }

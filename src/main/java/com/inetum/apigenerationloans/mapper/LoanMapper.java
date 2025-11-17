@@ -8,8 +8,6 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface LoanMapper {
 
-    Loan toEntity(LoanDTO dto);
-
     @Mapping(source = "client.clientId", target = "clientId")
     LoanDTO toDTO(Loan entity);
 

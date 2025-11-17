@@ -2,6 +2,7 @@ package com.inetum.apigenerationloans.service;
 
 import com.inetum.apigenerationloans.dto.LoanDTO;
 import com.inetum.apigenerationloans.exception.ClientNotFoundException;
+import com.inetum.apigenerationloans.exception.SimulationIdNotFoundException;
 import com.inetum.apigenerationloans.model.Client;
 import com.inetum.apigenerationloans.model.Loan;
 import com.inetum.apigenerationloans.model.Payment;
@@ -20,9 +21,6 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
-
-import static java.lang.Math.round;
 
 @Service
 public class LoanService {
@@ -49,7 +47,7 @@ public class LoanService {
 
         //trae la simulacion de la base de datos
         Simulation simulation = loanSimulationRepository.findById(simulationId)
-                .orElseThrow(() -> new NoSuchElementException("Simulation not found with ID: " + simulationId));
+                .orElseThrow(() -> new SimulationIdNotFoundException(simulationId));
 
         //obteniendo el id del cliente desde la simulacion
         Long clientId = simulation.getClient().getClientId();

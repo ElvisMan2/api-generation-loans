@@ -2,6 +2,8 @@ package com.inetum.apigenerationloans.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.inetum.apigenerationloans.model.Payment;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,8 +20,11 @@ import java.util.List;
 public class LoanDTO {
     private Long loanId;//id del prestamo ya generado
 
-    private Double loanAmount;//monto del prestamo||
+    @NotNull
+    private Double loanAmount;//monto del prestamo
     private Double interestRate;//porcentaje de interes
+
+    @Min(value = 1, message = "Term must be at least 1")
     private Integer term; //numero de meses
     private Double installment;//cuota mensual
     private Integer status;//si esta terminada de pagar o no
