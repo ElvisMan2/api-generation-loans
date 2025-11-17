@@ -13,26 +13,20 @@ import static org.mockito.Mockito.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(LoanController.class)
-public class LoanControllerTest {
+class LoanControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -42,7 +36,7 @@ public class LoanControllerTest {
 
     // CASO FELIZ
     @Test
-    public void testGenerateLoanBySimulationId_success() throws Exception {
+    void testGenerateLoanBySimulationId_success() throws Exception {
         Long simulationId = 1L;
 
         LoanDTO mockLoanDTO = new LoanDTO();
@@ -82,7 +76,7 @@ public class LoanControllerTest {
 
     // CASO SIMULACIÓN NO ENCONTRADA
     @Test
-    public void testGenerateLoanBySimulationId_simulationNotFound() throws Exception {
+    void testGenerateLoanBySimulationId_simulationNotFound() throws Exception {
         Long simulationId = 4L;
 
         when(loanService.generateLoanBySimulationId(simulationId))
@@ -99,7 +93,7 @@ public class LoanControllerTest {
 
     // CASO CLIENTE NO ENCONTRADO
     @Test
-    public void testGenerateLoanBySimulationId_clientNotFound() throws Exception {
+    void testGenerateLoanBySimulationId_clientNotFound() throws Exception {
         Long simulationId = 10L;
 
         when(loanService.generateLoanBySimulationId(simulationId))
@@ -113,6 +107,4 @@ public class LoanControllerTest {
                 .andExpect(jsonPath("$.status").value(500))
                 .andExpect(jsonPath("$.timestamp").exists());
     }
-
-
 }

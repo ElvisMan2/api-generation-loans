@@ -1,8 +1,6 @@
 package com.inetum.apigenerationloans.mapper;
 
 import com.inetum.apigenerationloans.dto.SimulationResponse;
-import com.inetum.apigenerationloans.mapper.SimulationMapper;
-import com.inetum.apigenerationloans.mapper.SimulationMapperImpl;
 import com.inetum.apigenerationloans.model.Client;
 import com.inetum.apigenerationloans.model.Simulation;
 import org.junit.jupiter.api.Test;

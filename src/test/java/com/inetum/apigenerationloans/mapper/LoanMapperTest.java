@@ -1,8 +1,6 @@
 package com.inetum.apigenerationloans.mapper;
 
 import com.inetum.apigenerationloans.dto.LoanDTO;
-import com.inetum.apigenerationloans.mapper.LoanMapper;
-import com.inetum.apigenerationloans.mapper.LoanMapperImpl;
 import com.inetum.apigenerationloans.model.Client;
 import com.inetum.apigenerationloans.model.Loan;
 import com.inetum.apigenerationloans.model.Payment;
